@@ -25,6 +25,16 @@ module RuboCop
       #   # good
       #   Rails.root.join('app/models/goober')
       #
+      # @example EnforcedStyle: arguments_or_slashes
+      #   # bad
+      #   File.join(Rails.root, 'app/models/goober')
+      #   File.join(Rails.root, 'app', 'models', 'goober')
+      #   "#{Rails.root}/app/models/goober"
+      #
+      #   # good
+      #   Rails.root.join('app', 'models', 'goober')
+      #   Rails.root.join('app/models/goober')
+      #
       class FilePath < Cop
         include ConfigurableEnforcedStyle
         include RangeHelp
@@ -33,6 +43,7 @@ module RuboCop
                       'instead.'
         MSG_ARGUMENTS = 'Please use `Rails.root.join(\'path\', \'to\')` ' \
                         'instead.'
+        MSG = 'Please use `Rails.root.join` instead.'
 
         def_node_matcher :file_join_nodes?, <<~PATTERN
           (send (const nil? :File) :join ...)
@@ -101,7 +112,14 @@ module RuboCop
         end
 
         def message(_node)
-          format(style == :arguments ? MSG_ARGUMENTS : MSG_SLASHES)
+          case style
+          when :arguments
+            MSG_ARGUMENTS
+          when :slashes
+            MSG_SLASHES
+          when :arguments_or_slashes
+            MSG
+          end
         end
       end
     end

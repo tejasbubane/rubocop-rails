@@ -234,11 +234,12 @@ Rails/FilePath:
   Description: 'Use `Rails.root.join` for file path joining.'
   Enabled: true
   VersionAdded: '0.47'
-  VersionChanged: '2.4'
+  VersionChanged: '2.8'
   EnforcedStyle: slashes
   SupportedStyles:
     - slashes
     - arguments
+    - arguments_or_slashes
 
 Rails/FindBy:
   Description: 'Prefer find_by over where.first.'

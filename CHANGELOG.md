@@ -11,6 +11,10 @@
 
 * [#301](https://github.com/rubocop-hq/rubocop-rails/issues/301): Set disalbed by default for `Rails/PluckId`. ([@koic][])
 
+### New features
+
+* [#298](https://github.com/rubocop-hq/rubocop-rails/pull/298): Add new config `arguments_or_slashes` to `Rails/FilePath`. ([@tejasbubane][])
+
 ## 2.7.0 (2020-07-21)
 
 ### New features

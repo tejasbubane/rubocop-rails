@@ -1185,7 +1185,7 @@ raise 'a bad error has happened'
 | Yes
 | No
 | 0.47
-| 2.4
+| 2.8
 |===
 
 This cop is used to identify usages of file path joining process
@@ -1220,6 +1220,20 @@ File.join(Rails.root, 'app/models/goober')
 Rails.root.join('app/models/goober')
 ----
 
+==== EnforcedStyle: arguments_or_slashes
+
+[source,ruby]
+----
+# bad
+File.join(Rails.root, 'app/models/goober')
+File.join(Rails.root, 'app', 'models', 'goober')
+"#{Rails.root}/app/models/goober"
+
+# good
+Rails.root.join('app', 'models', 'goober')
+Rails.root.join('app/models/goober')
+----
+
 === Configurable attributes
 
 |===
@@ -1227,7 +1241,7 @@ Rails.root.join('app/models/goober')
 
 | EnforcedStyle
 | `slashes`
-| `slashes`, `arguments`
+| `slashes`, `arguments`, `arguments_or_slashes`
 |===
 
 == Rails/FindBy
